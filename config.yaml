@@ -1,0 +1,37 @@
+
+# Configurartion of INPUT
+# 1. we start from bam files and please specify the input path
+# 2. if there is only one bam file from 10X experiment, please set 10X flag to true
+input:
+    # path to bam file
+    path: input/bam
+    # path to refenrence genome fasta file
+    # it should be the same one with the alignment step
+    ref: path/mm10.fa
+    # set splitbam to true if need to split the bam file to several sub-bam files based on CB tag
+    # the sub-bam files will be named as {CB}.bam
+    splitbam: false
+    # set ulimit to the file-max limitation in your system
+    # check your system's file-max limitation by command: ulimit -n
+    # you can increase the file-max limitation by command: ulimit -n 60000 
+    # smaller value means more loops and time are needed
+    ulimit: 1000
+
+# Configurartion of PREPROCESSING
+preprocessing:
+    # if need GATK preprocessing, set gatk to true and set dnsnp path
+    gatk: false
+    # please specify the dbSNP file if when set gatk as true
+    # it is available from ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/
+    dbsnp: path/mm10_dbsnp.vcf.gz 
+
+# Configurartion of MUTATION CALLING
+mutation:
+    # please specify the mutation caller, you can choose gatk, bcftools or strelka2
+    caller: strelka2
+    # set threads for mutation caller. Note: this parameter is not suite for gatk
+    threads: 4
+    
+    
+
+
